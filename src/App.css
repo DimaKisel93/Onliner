@@ -93,3 +93,16 @@ body {
 .button:active {
   border: 1px solid blue;
 }
+
+.form-group{
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label{
+  margin-bottom: 10px;
+}
+
+.form-group input{
+  margin-bottom: 5px;
+}

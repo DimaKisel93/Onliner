@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 function Table({cars}){
     console.log(cars)
@@ -19,7 +20,7 @@ function Table({cars}){
                     <td>{description}</td>
                     <td>
                         <Link to="/new" className="btn btn-danger">
-                        Create Collection | <i className="fas fa-plus"></i>
+                            <Button variant="danger">add Car</Button>
                         </Link> 
                     </td>
                     <td className='opration'>
