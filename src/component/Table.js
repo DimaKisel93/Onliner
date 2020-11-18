@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 function Table({cars}){
     console.log(cars)
@@ -16,6 +17,11 @@ function Table({cars}){
                     <td>{speed}</td>
                     <td>{weight}</td>
                     <td>{description}</td>
+                    <td>
+                        <Link to="/new" className="btn btn-danger">
+                        Create Collection | <i className="fas fa-plus"></i>
+                        </Link> 
+                    </td>
                     <td className='opration'>
                         <button className='button' onClick={() => removeData(id)}>Delete</button>
                     </td>
@@ -25,6 +31,9 @@ function Table({cars}){
     }
     return(
         <> 
+            <div className="col-2">
+                
+            </div>
             <h1 id='title'>Cars Table</h1>
             <table id='cars'>
                 <thead>
@@ -34,6 +43,7 @@ function Table({cars}){
                         <th scope="col">Speed</th> 
                         <th scope="col">Weight</th>        
                         <th scope="col">Description</th>        
+                        <th scope="col"></th>        
                         <th scope="col"></th>        
                     </tr>
                 </thead>

@@ -1,11 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
 import Table from './component/Table';
-import { Fragment } from 'react';
+import AddCars from './component/AddCars';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 function App() {
   return (
-      <Table />
+      <Switch>
+        <Route exact path="/" component={Table} />
+        <Route exact path="/new" component={AddCars} />
+      </Switch>
   );
 }
 
