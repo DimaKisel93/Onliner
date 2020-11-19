@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import { createCollection, getCollectionById, updateCollectionById } from './../redux/actions/collectionsActionCreators';
+import { createCar } from './../redux/actions/carActionsCreates';
 
 
-const AddCars = ({ }) => {
+const AddCars = ({history, dispatchCreateCarAction, cars }) => {
+  const [id, setId] = useState(6);
   const [car, setCar] = useState('');
   const [model, setModel] = useState('');
   const [speed, setSpeed] = useState('');
@@ -11,23 +12,14 @@ const AddCars = ({ }) => {
   const [description, setDescription] = useState('');
   const [error, setError] = useState({ name: false, description: false, topic: false, visible_field1: false, visible_field2: false, visible_field3: false, visible_field4: false, visible_field5: false, visible_field6: false, visible_field7: false, visible_field8: false, visible_field9: false, visible_field10: false, visible_field11: false, visible_field12: false });
 
- 
+
+  console.log(cars)
   const handleOnSubmit = event => {
     event.preventDefault();
-    // if (isFormInvalid()) updateErrorFlags();
-    // else {
-    //   const { collectionId } = match.params;
-    //   const data = { name, description, topic, visible_field1, visible_field2, visible_field3, visible_field4, visible_field5,visible_field6, visible_field7, visible_field8, visible_field9, visible_field10, visible_field11, visible_field12 };
-    //   if (collectionId) {
-    //     dispatchUpdateCollectionAction(collectionId, data)
-    //       toast.success('Collection updated Successfully!');
-    //       history.replace('/public/collections');
-    //   } else {
-    //     dispatchCreateCollectionAction(data)
-    //     toast.success('Collection created Successfully!');
-    //     history.replace('/public/collections');
-    //   }
-    // }
+    const data = { id, car, model, speed, weight, description };
+    console.log(data)
+    dispatchCreateCarAction(data)
+    history.replace('/');
   }
 
 
@@ -52,7 +44,7 @@ const AddCars = ({ }) => {
                 className={`form-control ${error.car ? 'is-invalid' : ''}`} />
             </div>
             <div className="form-group">
-              <label htmlFor="model">model</label>
+              <label htmlFor="model">Model</label>
               <input noValidate id="model"
                 type="text"
                 placeholder="model"
@@ -62,9 +54,9 @@ const AddCars = ({ }) => {
                 className={`form-control ${error.model ? 'is-invalid' : ''}`} />
             </div>
             <div className="form-group">
-              <label htmlFor="speed">speed</label>
+              <label htmlFor="speed">Speed</label>
               <input noValidate id="speed"
-                type="text"
+                type="number"
                 placeholder="speed"
                 name="speed"
                 value={speed}
@@ -72,9 +64,9 @@ const AddCars = ({ }) => {
                 className={`form-control ${error.speed ? 'is-invalid' : ''}`} />
             </div>
             <div className="form-group">
-              <label htmlFor="weight">weight</label>
+              <label htmlFor="weight">Weight</label>
               <input noValidate id="weight"
-                type="text"
+                type="number"
                 placeholder="weight"
                 name="weight"
                 value={weight}
@@ -107,5 +99,9 @@ const AddCars = ({ }) => {
   )
 }
 
+const mapDispatchToProps = dispatch => ({
+    dispatchCreateCarAction: (data) =>
+      dispatch(createCar(data))
+});
 
-export default  AddCars;
+  export default connect(null, mapDispatchToProps)(AddCars);

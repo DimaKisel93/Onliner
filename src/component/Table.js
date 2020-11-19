@@ -1,15 +1,17 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-
-function Table({cars}){
+import { fetchCars } from './../redux/actions/carActionsCreates'
+function Table({cars, dispatchFetchAllCarAction}){
+    
+    // useEffect(() => dispatchFetchAllCarAction(), [dispatchFetchAllCarAction]);
     console.log(cars)
-
     const removeData = (id) => {
 
     }
     const renderBody = () => {
+        console.log(cars)
         return cars && cars.map(({ id, car, model, speed, weight, description }) => {
             return (
                 <tr key={id}>
@@ -18,11 +20,6 @@ function Table({cars}){
                     <td>{speed}</td>
                     <td>{weight}</td>
                     <td>{description}</td>
-                    <td>
-                        <Link to="/new" className="btn btn-danger">
-                            <Button variant="danger">add Car</Button>
-                        </Link> 
-                    </td>
                     <td className='opration'>
                         <button className='button' onClick={() => removeData(id)}>Delete</button>
                     </td>
@@ -36,6 +33,9 @@ function Table({cars}){
                 
             </div>
             <h1 id='title'>Cars Table</h1>
+            <Link to="/new" className="btn btn-danger">
+                <Button variant="danger">add Car</Button>
+            </Link> 
             <table id='cars'>
                 <thead>
                     <tr className="thead-dark col-12">
@@ -58,8 +58,10 @@ function Table({cars}){
     
 }
 
-const mapStateToProps = state => ({
-    cars: state.cars
+const mapStateToProps = state => state;
+
+const mapDispatchToProps = dispatch => ({
+    dispatchFetchAllCarAction: () => dispatch(fetchCars()),
 });
 
-export default connect(mapStateToProps)(Table)
+export default connect(mapStateToProps, mapDispatchToProps)(Table)
