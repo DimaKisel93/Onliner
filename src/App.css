@@ -118,3 +118,8 @@ thead button.descending::after {
   display: inline-block;
   margin-left: 1em;
 }
+
+.edit__container{
+  display: flex;
+  justify-content: space-between;
+}
