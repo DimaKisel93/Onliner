@@ -1,21 +1,14 @@
 import * as constants from './../constants';
 
 
-export const fetchCars = () => {  
-  debugger;
-  return dispatch => {
-    dispatch(setCar())
-  }
-}
-
-function setCar() {
+export const removeCars = (id) => {  
   return {
-    type: "SET_ALL_CAR"
+    type: "REMOVE_CAR",
+    payload:id
   };
 }
 
 export const createCar = (data) => {  
-      debugger;
       return {
         type: "ADD_CAR",
         payload: data
@@ -23,9 +16,3 @@ export const createCar = (data) => {
   
 }
 
-function addCar(data) {
-  return {
-    type: "ADD_CAR",
-    payload: data
-  };
-}

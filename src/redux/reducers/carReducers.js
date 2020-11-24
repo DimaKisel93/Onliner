@@ -47,14 +47,11 @@ const initialState = [
 
 
 export default function carsReducer(state = initialState, action) {
-  debugger;
   switch (action.type) {  
-    // case constants.SET_ALL_CAR:
-    //   return {...state};   
     case constants.ADD_CAR:
       return  [...state, action.payload];
     case constants.REMOVE_CAR:
-      return state.cars.filter(item => item.id !== action.payload);
+      return state.filter(item => item.id !== action.payload);
     default:
       return state;
   }

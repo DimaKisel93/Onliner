@@ -2,17 +2,26 @@ import React,{useEffect} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { fetchCars } from './../redux/actions/carActionsCreates'
-function Table({cars, dispatchFetchAllCarAction}){
-    
-    // useEffect(() => dispatchFetchAllCarAction(), [dispatchFetchAllCarAction]);
-    console.log(cars)
-    const removeData = (id) => {
+import { removeCars } from './../redux/actions/carActionsCreates'
+import useSortableData from './useSortableData'
 
+function Table({cars, dispatchRemoveCar}){
+    
+    const {items, requestSort, sortConfig} = useSortableData(cars);
+
+    const getClassNamesFor = (name) => {
+        if (!sortConfig) {
+          return;
+        }
+        return sortConfig.key === name ? sortConfig.direction : undefined;
+      };
+
+    const removeData = (id) => {
+        dispatchRemoveCar(id)
     }
+
     const renderBody = () => {
-        console.log(cars)
-        return cars && cars.map(({ id, car, model, speed, weight, description }) => {
+        return items && items.map(({ id, car, model, speed, weight, description }) => {
             return (
                 <tr key={id}>
                     <td>{car}</td>
@@ -27,6 +36,7 @@ function Table({cars, dispatchFetchAllCarAction}){
             )
         })
     }
+
     return(
         <> 
             <div className="col-2">
@@ -39,11 +49,21 @@ function Table({cars, dispatchFetchAllCarAction}){
             <table id='cars'>
                 <thead>
                     <tr className="thead-dark col-12">
-                        <th scope="col">Car</th>
-                        <th scope="col">Model</th>
-                        <th scope="col">Speed</th> 
-                        <th scope="col">Weight</th>        
-                        <th scope="col">Description</th>        
+                        <th scope="col">
+                            <button type="button" onClick={() => requestSort("car")} className={getClassNamesFor('car')}>car</button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" onClick={() => requestSort("model")} className={getClassNamesFor('model')}>model</button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" onClick={() => requestSort("speed")} className={getClassNamesFor('speed')}>speed</button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" onClick={() => requestSort("weight")} className={getClassNamesFor('weight')}>weight</button>
+                        </th>
+                        <th scope="col">
+                            <button type="button" onClick={() => requestSort("description")} className={getClassNamesFor('description')}>description</button>
+                        </th>       
                         <th scope="col"></th>        
                         <th scope="col"></th>        
                     </tr>
@@ -61,7 +81,7 @@ function Table({cars, dispatchFetchAllCarAction}){
 const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
-    dispatchFetchAllCarAction: () => dispatch(fetchCars()),
+    dispatchRemoveCar: (id) => dispatch(removeCars(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Table)
