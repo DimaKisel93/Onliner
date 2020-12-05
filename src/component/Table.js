@@ -1,11 +1,13 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { removeCars } from './../redux/actions/carActionsCreates'
 import useSortableData from './useSortableData'
 
+
 function Table({cars, dispatchRemoveCar}){
+
     const [q, setQ] = useState("")
     const [searchColumns, setSearchColumns] = useState(["car", "model"])
     const {items, requestSort, sortConfig} = useSortableData(cars);
