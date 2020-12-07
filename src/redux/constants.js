@@ -1,3 +1,7 @@
-export const ADD_CAR = 'ADD_CAR';
-export const REMOVE_CAR = 'REMOVE_CAR';
-export const SET_ALL_CAR = 'SET_ALL_CAR';
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';
+export const REQUEST_CARS = 'REQUEST_CARS';
+export const SET_ALL_CARS = 'SET_ALL_CARS';
+export const SET_ALL_CARS_IMG_URL = 'SET_ALL_CARS_IMG_URL';
+export const FILTER_PRODUCTS_BY_SIZE = 'FILTER_PRODUCTS_BY_SIZE';
+export const FILTER_PRODUCTS = 'FILTER_PRODUCTS';

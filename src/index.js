@@ -5,8 +5,15 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import configureStore from './redux/configureStore';
-const store = configureStore();
+import { createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import createSagaMiddleware from 'redux-saga';
+import rootReducer from './redux/reducers';
+import { sagaWatcher } from './redux/sagas';
+
+const saga = createSagaMiddleware()
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(saga)))
+saga.run(sagaWatcher);
 
 ReactDOM.render(
   <Provider store={store}>
