@@ -5,7 +5,7 @@ const initialState = {
     cars:[],
     url:[],
     filteredItems:[],
-    size:"",
+    brand:"",
     model:"",
     sort:""
 }
@@ -18,8 +18,8 @@ export const carsReducers = (state = initialState, action) => {
             return {...state, cars:action.payload, filteredItems: action.payload}
         case constants.SET_ALL_CARS_IMG_URL:
             return {...state, url:action.payload}
-        case constants.FILTER_PRODUCTS_BY_SIZE:
-            return {...state, filteredItems:action.payload.cars, size:action.payload.size}
+        case constants.FILTER_PRODUCTS_BY_BRAND:
+            return {...state, filteredItems:action.payload.cars, brand:action.payload.brand}
         case constants.FILTER_PRODUCTS_BY_MODEL:
             return {...state, filteredItems:action.payload.cars, model:action.payload.model}
         case constants.ORDER_PRODUCTS_BY_SPEED:

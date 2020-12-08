@@ -3,14 +3,14 @@ import  AppDrawer  from './AppDrawer/index';
 import  AppContent  from './AppContent/index';
 import { Link } from 'react-router-dom';
 import collection_image from '../img/Lexus.jpg'
-import { fetchCars, filterProducts} from "../redux/actions/carActionsCreates";
+import { fetchCars} from "../redux/actions/carActionsCreates";
 import { useSelector,useDispatch } from 'react-redux';
 
 
 function Cars(){
     const filteredProducts = useSelector(state => state.cars.filteredItems);
     const dispatch = useDispatch();
-    // console.log(filteredProducts[0].img)
+   
 
     useEffect(() => {
       dispatch(fetchCars())

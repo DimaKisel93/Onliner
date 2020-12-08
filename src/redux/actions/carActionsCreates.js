@@ -1,4 +1,4 @@
-import {SHOW_LOADER, HIDE_LOADER, REQUEST_CARS, FILTER_PRODUCTS_SIZE, FILTER_PRODUCTS_MODEL, ORDER_PRODUCTS, REQUEST_CAR} from "../constants"
+import {SHOW_LOADER, HIDE_LOADER, REQUEST_CARS, FILTER_PRODUCTS_BRAND, FILTER_PRODUCTS_MODEL, ORDER_PRODUCTS, REQUEST_CAR} from "../constants"
 
 export function fetchCars(){
     return {
@@ -14,14 +14,13 @@ export function fetchCar(id){
     }
 }
 
-export function filterProducts(cars, size){
+export function filterBrand(cars, brand){
     return {
-        type: FILTER_PRODUCTS_SIZE,
+        type: FILTER_PRODUCTS_BRAND,
         cars:cars,
-        size:size
+        brand:brand
     }
 }
-
 
 export function filterModel(cars, model){
     return {

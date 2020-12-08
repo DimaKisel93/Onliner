@@ -1,5 +1,5 @@
 import {takeEvery, put, call} from 'redux-saga/effects';
-import { REQUEST_CARS, SET_ALL_CARS, SET_ALL_CARS_IMG_URL, FILTER_PRODUCTS_BY_SIZE, FILTER_PRODUCTS_SIZE , FILTER_PRODUCTS_MODEL, FILTER_PRODUCTS_BY_MODEL, ORDER_PRODUCTS, ORDER_PRODUCTS_BY_SPEED, REQUEST_CAR, SET_CAR} from './constants';
+import { REQUEST_CARS, SET_ALL_CARS, SET_ALL_CARS_IMG_URL, FILTER_PRODUCTS_BY_BRAND, FILTER_PRODUCTS_BRAND , FILTER_PRODUCTS_MODEL, FILTER_PRODUCTS_BY_MODEL, ORDER_PRODUCTS, ORDER_PRODUCTS_BY_SPEED, REQUEST_CAR, SET_CAR} from './constants';
 import {hideLoader, showLoader} from './actions/carActionsCreates';
 import { db, storageRef } from '../firebase';
 
@@ -7,7 +7,7 @@ export function* sagaWatcher(){
     try {
         yield takeEvery(REQUEST_CARS, sagaWorker)
         yield takeEvery(REQUEST_CAR, sagaWorkerCar)
-        yield takeEvery(FILTER_PRODUCTS_SIZE, sagaWorkerFilterSize)
+        yield takeEvery(FILTER_PRODUCTS_BRAND, sagaWorkerFilterSize)
         yield takeEvery(FILTER_PRODUCTS_MODEL, sagaWorkerFilterModel)
         yield takeEvery(ORDER_PRODUCTS, sagaWorkerSortSpeed)
     } catch (error) {
@@ -27,6 +27,32 @@ function* sagaWorker(){
     // yield put(hideLoader()) 
 }
 
+async function fetchImgUrl(){
+    debugger;
+    try {
+        
+        const arr = storageRef.listAll().then(res => {
+            const ii = res.items.map(itemRef => {
+                return itemRef.getDownloadURL().then(url =>{
+
+                    return url
+                }
+                )
+               
+            })
+            return ii
+        }).then(urls =>{
+            console.log(urls)
+            return urls
+        })
+        return arr
+    } catch (error) {
+        error.status = 400;
+        console.log("Ошибка")
+    }
+    
+}  
+
 
 function* sagaWorkerCar(obj){   
     const payload = yield call(fetchCar, obj)
@@ -34,12 +60,12 @@ function* sagaWorkerCar(obj){
 }
 
 function* sagaWorkerFilterSize(cars){
-    yield put({type: FILTER_PRODUCTS_BY_SIZE , payload: {
-        size: cars.size,    
-        cars: cars.size === ""
+    yield put({type: FILTER_PRODUCTS_BY_BRAND , payload: {
+        brand: cars.brand,    
+        cars: cars.brand === ""
             ? cars.cars
             : cars.cars.filter(
-                (x) => x.brand.toUpperCase().indexOf(cars.size.toUpperCase()) >= 0
+                (x) => x.brand.toUpperCase().indexOf(cars.brand.toUpperCase()) >= 0
             ),    
        
     }, })
@@ -117,29 +143,3 @@ async function fetchCar(obj){
     } 
 }
 
-async function fetchImgUrl(){
-    debugger;
-    try {
-        const arr = storageRef.listAll().then(res => {
-            // const arr = res.items.forEach(function(itemRef) {
-            //     let url = itemRef.getDownloadURL();
-            //     urlArr.push(url)  
-            // });
-            const ii = res.items.map(itemRef => {
-                return itemRef.getDownloadURL().then(url =>{
-                    return url
-                }
-                )
-               
-            })
-            return ii
-        }).then(urls =>{
-            console.log(urls)
-            return urls
-        })
-        return arr
-    } catch (error) {
-        error.status = 400;
-        console.log("Ошибка")
-    }       
-}  

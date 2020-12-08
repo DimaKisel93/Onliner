@@ -6,11 +6,11 @@ import Drawer, {
 } from '@material/react-drawer';
 import { MenuItem, Select, InputLabel } from '@material-ui/core';
 import { useSelector,useDispatch } from 'react-redux';
-import { filterProducts, filterModel, sortProducts } from "../../redux/actions/carActionsCreates";
+import { filterBrand, filterModel, sortProducts } from "../../redux/actions/carActionsCreates";
 
 export default function AppDrawer(){
     const cars = useSelector(state => state.cars.cars);
-    const size = useSelector(state => state.cars.size);
+    const brand = useSelector(state => state.cars.brand);
     const model = useSelector(state => state.cars.model);
     const sort = useSelector(state => state.cars.sort);
     const filteredProducts = useSelector(state => state.cars.filteredItems);
@@ -43,9 +43,9 @@ export default function AppDrawer(){
                 className="select" 
                 labelId="sort"
                 id="select"
-                value={size}
+                value={brand}
                 onChange={(event) => {
-                    dispatch(filterProducts(
+                    dispatch(filterBrand(
                         cars,
                         event.target.value
                     ));
