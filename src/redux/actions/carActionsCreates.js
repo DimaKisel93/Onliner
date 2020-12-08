@@ -1,9 +1,16 @@
-import {SHOW_LOADER, HIDE_LOADER, REQUEST_CARS, FILTER_PRODUCTS_SIZE, FILTER_PRODUCTS_MODEL, ORDER_PRODUCTS} from "../constants"
+import {SHOW_LOADER, HIDE_LOADER, REQUEST_CARS, FILTER_PRODUCTS_SIZE, FILTER_PRODUCTS_MODEL, ORDER_PRODUCTS, REQUEST_CAR} from "../constants"
 
 export function fetchCars(){
     return {
         type: REQUEST_CARS
        
+    }
+}
+
+export function fetchCar(id){
+    return {
+        type: REQUEST_CAR,
+        id:id
     }
 }
 

@@ -12,6 +12,6 @@ firebase.initializeApp({
   
   const db = firebase.firestore();
   const storage = firebase.storage();
-  var storageRef = storage.ref();
+  const storageRef = storage.ref();
 
   export {db, storage, storageRef}
