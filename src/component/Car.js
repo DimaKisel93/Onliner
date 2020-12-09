@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import collection_image from '../img/Lexus.jpg'
+import React, { useEffect } from 'react';
 import { fetchCar } from '../redux/actions/carActionsCreates';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -7,10 +6,9 @@ const Car = ({match}) => {
 
   const cars = useSelector(state => state.cars.cars);
   const dispatch = useDispatch();
-  console.log(cars)
   useEffect(() => {
     dispatch(fetchCar(match.params.carId))
-  }, [dispatch])
+  }, [dispatch, match])
   
   return (
     <React.Fragment>
@@ -21,7 +19,7 @@ const Car = ({match}) => {
       </div>
         {cars &&  
         <ul>
-          <img src={collection_image} alt="lexus" with="200" height="100"></img>
+          <img src={cars[0].img} alt="lexus" with="200" height="100"></img>
           <li>{cars[0].brand}</li>
           <li>{cars[0].model}</li>
           <li>{cars[0].speed}</li>

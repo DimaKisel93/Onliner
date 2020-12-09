@@ -16,8 +16,6 @@ export const carsReducers = (state = initialState, action) => {
             return {...state, cars:action.payload, filteredItems: action.payload}
         case constants.SET_CAR:
             return {...state, cars:action.payload, filteredItems: action.payload}
-        case constants.SET_ALL_CARS_IMG_URL:
-            return {...state, url:action.payload}
         case constants.FILTER_PRODUCTS_BY_BRAND:
             return {...state, filteredItems:action.payload.cars, brand:action.payload.brand}
         case constants.FILTER_PRODUCTS_BY_MODEL:
